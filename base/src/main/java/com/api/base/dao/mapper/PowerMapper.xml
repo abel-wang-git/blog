@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.base.dao.PowerMapper">
+  <resultMap id="BaseResultMap" type="com.api.base.model.Power">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+  </resultMap>
+
+  <select id="getByUser" parameterType="java.lang.Long" resultType="com.api.base.model.Power">
+    SELECT p.* FROM (SELECT  * FROM user_role WHERE user_id = #{id}) u
+      LEFT JOIN role r ON (r.id = u.role_id)
+        LEFT JOIN role_power rp ON (r.id=rp.role_id)
+          LEFT JOIN power p ON (p.id=rp.power_id)
+          WHERE p.id is not null
+  </select>
+  <select id="getByRole" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from power p where exists(select id from  role_power r where r.power_id = p.id and role_id= #{roleId} )
+  </select>
+
+  <select id="listAll" resultType="com.api.common.mybatis.ResultMap">
+    select power.*,p.name as p_name from power
+    left join power p on(power.pid = p.id)
+    where power.pid != 0
+  </select>
+
+
+</mapper>

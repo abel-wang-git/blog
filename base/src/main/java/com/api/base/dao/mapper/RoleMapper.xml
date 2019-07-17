@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.base.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.api.base.model.Role">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+
+  <select id="getByUser" parameterType="java.lang.Long" resultType="com.api.base.model.Role">
+     SELECT r.* FROM (SELECT  * FROM user_role WHERE user_id = #{userId}) u
+        LEFT JOIN role r ON (r.id = u.role_id)
+   </select>
+
+    <select id="deletePower" parameterType="java.lang.Long" >
+      DELETE FROM role_power WHERE role_id = #{roleId}
+    </select>
+</mapper>
