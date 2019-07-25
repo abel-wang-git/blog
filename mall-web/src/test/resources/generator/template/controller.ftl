@@ -31,7 +31,7 @@ public class ${modelNameUpperCamel}Controller extends Ctrl{
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
     @ApiOperation(value = "${businessName}添加", tags = {"${businessName}"}, notes = "${businessName}添加")
-    @PostMapping("/add")
+    @PostMapping(value="/add",name="${businessName}添加")
     public Result add(@ApiParam ${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
         return ResultGenerator.genSuccessResult();
@@ -39,16 +39,16 @@ public class ${modelNameUpperCamel}Controller extends Ctrl{
 
     @ApiOperation(value = "${businessName}删除", tags = {"${businessName}"}, notes = "${businessName}删除")
     @ApiImplicitParams({
-    @ApiImplicitParam(name = "id",required=true, value = "${businessName}id", dataType = "Long", paramType = "query")
+        @ApiImplicitParam(name = "id",required=true, value = "${businessName}id", dataType = "Long", paramType = "query")
     })
-    @PostMapping("/delete")
+    @PostMapping(value="/delete",name="${businessName}删除")
     public Result delete(@RequestParam Long id) {
         ${modelNameLowerCamel}Service.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @ApiOperation(value = "${businessName}修改", tags = {"${businessName}"}, notes = "${businessName}修改,对象主键必填")
-    @PostMapping("/update")
+    @PostMapping(value="/update",name="${businessName}修改")
     public Result update(@ApiParam ${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
         return ResultGenerator.genSuccessResult();
@@ -58,7 +58,7 @@ public class ${modelNameUpperCamel}Controller extends Ctrl{
     @ApiImplicitParams({
         @ApiImplicitParam(name = "id",required=true, value = "${businessName}id", dataType = "Long", paramType = "query")
     })
-    @PostMapping("/detail")
+    @PostMapping(value="/detail",name="${businessName}详细信息")
     public Result detail(@RequestParam Integer id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
         return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
@@ -70,7 +70,7 @@ public class ${modelNameUpperCamel}Controller extends Ctrl{
         @ApiImplicitParam(name = "page", value = "页码", dataType = "String", paramType = "query"),
         @ApiImplicitParam(name = "size", value = "每页显示的条数", dataType = "String", paramType = "query",defaultValue="10")
     })
-    @PostMapping("/list")
+    @PostMapping(value="/list",name="${businessName}列表信息")
     public Result list(@RequestParam(defaultValue = "[]") String  where ,
                        @RequestParam(defaultValue = "0") Integer page,
                        @RequestParam(defaultValue = "10") Integer size) {
