@@ -40,7 +40,7 @@ public class CodeGenerator {
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());//@date
 
     public static void main(String[] args) {
-        genCode(true,true,"test");
+        genCode(true,true,"用户信息","user_info");
 //        genController("user_info",null);
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
     }
@@ -50,10 +50,8 @@ public class CodeGenerator {
      * 如输入表名称 "t_user_detail" 将生成 TUserDetail、TUserDetailMapper、TUserDetailService ...
      * @param tableNames 数据表名称...
      */
-    public static void genCode(boolean isMapper ,boolean isService, String... tableNames) {
-        for (String tableName : tableNames) {
-            genCodeByCustomModelName(tableName, null,isService,isMapper);
-        }
+    public static void genCode(boolean isMapper ,boolean isService,String businessName, String tableNames) {
+            genCodeByCustomModelName(tableNames, null,businessName,isService,isMapper);
     }
 
     /**
@@ -62,11 +60,11 @@ public class CodeGenerator {
      * @param tableName 数据表名称
      * @param modelName 自定义的 Model 名称
      */
-    public static void genCodeByCustomModelName(String tableName, String modelName,boolean isServer,boolean isMapper) {
+    public static void genCodeByCustomModelName(String tableName, String modelName,String businessName,boolean isServer,boolean isMapper) {
         genModelAndMapper(tableName, modelName,isMapper);
         if(isServer){
             genService(tableName, modelName);
-            genController(tableName, modelName);
+            genController(tableName, modelName,businessName);
         }
 
     }
@@ -185,7 +183,7 @@ public class CodeGenerator {
         }
     }
 
-    public static void genController(String tableName, String modelName) {
+    public static void genController(String tableName, String modelName,String businessName) {
         try {
             freemarker.template.Configuration cfg = getConfiguration();
 
@@ -198,6 +196,7 @@ public class CodeGenerator {
             data.put("modelNameLowerCamel", CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, modelNameUpperCamel));
             data.put("basePackage", BASE_PACKAGE);
             data.put("baseCore", BASE_CORE);
+            data.put("businessName", businessName);
 
             File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_CONTROLLER + modelNameUpperCamel + "Controller.java");
             if (!file.getParentFile().exists()) {
