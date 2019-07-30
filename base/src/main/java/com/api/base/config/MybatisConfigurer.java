@@ -47,7 +47,7 @@ public class MybatisConfigurer {
 
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        factory.setMapperLocations(resolver.getResources("classpath*:com/api/base/dao/mapper/*.xml"));
+        factory.setMapperLocations(resolver.getResources("classpath*:com/api/**/mapper/*.xml"));
         return factory.getObject();
     }
 
