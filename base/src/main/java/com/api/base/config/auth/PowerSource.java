@@ -22,9 +22,6 @@ public class PowerSource implements FilterInvocationSecurityMetadataSource {
 
     private PowerService powerService;
 
-//    @Autowired
-//    private PowerService powerService1;
-
     public PowerSource(PowerService powerService) {
         this.powerService = powerService;
     }

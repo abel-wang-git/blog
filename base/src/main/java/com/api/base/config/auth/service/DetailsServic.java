@@ -32,6 +32,7 @@ public class DetailsServic implements UserDetailsService {
         if(user==null){
             throw new UsernameNotFoundException("用户不存在");
         }
+
         List<Role> roles = userService.getRole(user.getId());
         List<GrantedAuthority> authorities = new ArrayList<>();
         List<String> rolestr = new ArrayList<>();

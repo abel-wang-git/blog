@@ -1,15 +1,11 @@
 package com.api.base.config.auth;
 
-import com.api.base.config.auth.handler.GoAccessDeniedHandler;
-import com.api.base.config.auth.handler.GoAuthenticationEntryPoint;
-import com.api.base.config.auth.handler.GoAuthenticationFailureHandler;
-import com.api.base.config.auth.handler.GoAuthenticationSuccessHandler;
+import com.api.base.config.auth.handler.*;
 import com.api.base.config.auth.service.DetailsServic;
 import com.api.base.service.PowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
@@ -100,7 +96,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .successHandler(new GoAuthenticationSuccessHandler(jwtTokenUtil))
                 .failureHandler(new GoAuthenticationFailureHandler())
-                .and().logout().logoutUrl("/loginOut")
+                .and().logout().logoutUrl("/logout")
+                .logoutSuccessHandler(new GoLogoutSuccessHandler())
                 .and().cors().and().csrf().disable();
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }

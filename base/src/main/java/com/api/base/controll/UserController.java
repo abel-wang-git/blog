@@ -51,7 +51,7 @@ public class UserController extends Ctrl {
 
     @PostMapping(value = "/list", name = "用户列表")
     @ResponseBody
-    public Result list(@RequestParam String where,
+    public Result list(@RequestParam(defaultValue = "[]") String where,
                        @RequestParam(defaultValue = "0") Integer page,
                        @RequestParam(defaultValue = "10") Integer size) {
         PageHelper.startPage(page, size);
