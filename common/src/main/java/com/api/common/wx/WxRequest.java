@@ -6,7 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 /**
  * Created by Administrator on 2019/6/13.
  */
-
+//
 @JacksonXmlRootElement(localName = "xml")
 public class WxRequest {
     @JacksonXmlProperty(localName = "ToUserName")

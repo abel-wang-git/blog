@@ -17,7 +17,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
-
+//
 public class WxCommon {
 
     public static Map<String,Object> getOpenId(String appid,String secret,String jscode){

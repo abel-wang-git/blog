@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 
 @Component
+@ConfigurationProperties("wx.config")
 public class WXConfig extends WXPayConfig {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -23,6 +24,8 @@ public class WXConfig extends WXPayConfig {
     private byte[] certData;
 
     private String certPath;
+
+    private String notifyUrl;
 
     private IWXPayDomain wXPayDomain;
 
@@ -94,4 +97,11 @@ public class WXConfig extends WXPayConfig {
 
     }
 
+    public String getNotifyUrl() {
+        return notifyUrl;
+    }
+
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
+    }
 }
