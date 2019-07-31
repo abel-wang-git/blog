@@ -13,6 +13,7 @@ import com.api.core.response.Result;
 import com.api.core.response.ResultGenerator;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +35,7 @@ import java.util.Map;
  * Created by CodeGenerator on 2019/03/25.
  */
 @PowerEnable(name = "账号管理",url = "/user")
+@Api(value = "账号管理", tags = {"账号管理"})
 @RestController
 @RequestMapping(value = "/user")
 public class UserController extends Ctrl {
@@ -43,12 +45,19 @@ public class UserController extends Ctrl {
     @Resource
     private JwtTokenUtil jwtTokenUtil;
 
+    @ApiOperation(value = "用户添加", tags = {"账号管理"}, notes = "用户添加")
     @PostMapping(value = "/add", name = "用户添加")
     public Result add(User user) {
         userService.save(user);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ApiOperation(value = "用户列表", tags = {"账号管理"}, notes = "用户列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "where", value = "条件json", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "page", value = "页数", dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "size", value = "条数", dataType = "Integer", paramType = "query"),
+    })
     @PostMapping(value = "/list", name = "用户列表")
     @ResponseBody
     public Result list(@RequestParam(defaultValue = "[]") String where,
@@ -66,6 +75,11 @@ public class UserController extends Ctrl {
         return ResultGenerator.genSuccessResult(pageInfo);
     }
 
+    @ApiOperation(value = "用户添加角色", tags = {"账号管理"}, notes = "用户添加角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "roles", value = "角色json", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "userId", value = "用户id", dataType = "Long", paramType = "query"),
+    })
     @PostMapping(value = "/add/role", name = "用户添加角色")
     @Caching(evict = {@CacheEvict(value = "role", key = "#userId"), @CacheEvict(value = "power", key = "#userId")})
     public Result addRole(String roles, Long userId) {
@@ -73,6 +87,7 @@ public class UserController extends Ctrl {
         return ResultGenerator.genSuccessResult();
     }
 
+    @ApiOperation(value = "获取登录用户信息", tags = {"账号管理"}, notes = "获取登录用户信息")
     @PostMapping(value = "get", name = "获取登录用户信息")
     public Result get(Authentication authentication) {
         AuthUser authUser = (AuthUser) authentication.getPrincipal();
@@ -87,7 +102,7 @@ public class UserController extends Ctrl {
      * @param authentication
      * @return
      */
-    @ApiOperation(value = "绑定微信", tags = {"账号"}, notes = "绑定微信")
+    @ApiOperation(value = "绑定微信", tags = {"账号管理"}, notes = "绑定微信")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "openid", value = "openid", dataType = "String", paramType = "query"),
     })
@@ -107,7 +122,7 @@ public class UserController extends Ctrl {
         return ResultGenerator.genSuccessResult();
     }
 
-    @ApiOperation(value = "根据openid刷新token", tags = {"账号"}, notes = "根据open刷新token")
+    @ApiOperation(value = "根据openid刷新token", tags = {"账号管理"}, notes = "根据open刷新token")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "openid", value = "openid", dataType = "String", paramType = "query"),
     })
@@ -127,7 +142,7 @@ public class UserController extends Ctrl {
     }
 
 
-    @ApiOperation(value = "获取openid", tags = {"账号"}, notes = "获取openid")
+    @ApiOperation(value = "获取openid", tags = {"账号管理"}, notes = "获取openid")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "appid", value = "appid", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "secret", value = "secret", dataType = "String", paramType = "query"),
