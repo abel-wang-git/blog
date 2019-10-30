@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.dao.ArticleClassMapper">
+  <resultMap id="BaseResultMap" type="com.api.model.ArticleClass">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="class_id" jdbcType="BIGINT" property="classId" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+  </resultMap>
+</mapper>

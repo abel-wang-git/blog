@@ -18,7 +18,7 @@ import static com.api.config.ProjectConstant.*;
  */
 public class CodeGenerator {
     //JDBC配置，请修改为你项目的实际配置
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/mall?useInformationSchema=true&nullCatalogMeansCurrent=true";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/blog?useInformationSchema=true&nullCatalogMeansCurrent=true";
     private static final String JDBC_USERNAME = "root";
     private static final String JDBC_PASSWORD = "123456";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
@@ -27,7 +27,7 @@ public class CodeGenerator {
     private static final String BASE_SERVICE_IMPL = "com.api.core.AbstractService";
     private static final String BASE_CORE = "com.api.core";
 
-    private static final String PROJECT_PATH = System.getProperty("user.dir")+"/mall-web";//项目在硬盘上的基础路径
+    private static final String PROJECT_PATH = System.getProperty("user.dir")+"/base";//项目在硬盘上的基础路径
     private static final String TEMPLATE_FILE_PATH = PROJECT_PATH + "/src/test/resources/generator/template";//模板位置
 
     private static final String JAVA_PATH = "/src/main/java"; //java文件路径
@@ -40,7 +40,7 @@ public class CodeGenerator {
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());//@date
 
     public static void main(String[] args) {
-        genCode(true,true,"商户用户","trader_info");
+        genCode(false,false,"文章列表信息","sys_user");
 //        genController("user_info",null);
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
     }
@@ -119,7 +119,6 @@ public class CodeGenerator {
         javaClientGeneratorConfiguration.setConfigurationType("XMLMAPPER");
         if(isMapper){
             context.setJavaClientGeneratorConfiguration(javaClientGeneratorConfiguration);
-            System.out.println(modelName + "Mapper.java 生成成功");
         }
         TableConfiguration tableConfiguration = new TableConfiguration(context);
         tableConfiguration.setTableName(tableName);

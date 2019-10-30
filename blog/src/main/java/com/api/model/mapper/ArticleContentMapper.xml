@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.dao.ArticleContentMapper">
+  <resultMap id="BaseResultMap" type="com.api.model.ArticleContent">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.dao.ArticleCommentMapper">
+  <resultMap id="BaseResultMap" type="com.api.model.ArticleComment">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="comment_id" jdbcType="BIGINT" property="commentId" />
+    <result column="p_id" jdbcType="BIGINT" property="pId" />
+    <result column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+  </resultMap>
+</mapper>

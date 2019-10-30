@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.dao.ArticleListMapper">
+  <resultMap id="BaseResultMap" type="com.api.model.ArticleList">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="class_id" jdbcType="BIGINT" property="classId" />
+    <result column="top" jdbcType="BIT" property="top" />
+    <result column="cover_picture" jdbcType="VARCHAR" property="coverPicture" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="hot" jdbcType="INTEGER" property="hot" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="digest" jdbcType="VARCHAR" property="digest" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+  </resultMap>
+</mapper>
