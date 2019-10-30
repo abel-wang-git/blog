@@ -37,7 +37,7 @@ public class PowerController extends Ctrl {
     public Result list() {
         List<Power> powers = powerService.findAll();
 
-        Map<Long, List<Power>> res = powers.stream().collect(Collectors.groupingBy(Power::getPid));
+        Map<Integer, List<Power>> res = powers.stream().collect(Collectors.groupingBy(Power::getPid));
 
         List<Power> parent = res.get(0L);
 
@@ -52,7 +52,7 @@ public class PowerController extends Ctrl {
             elTrees.add(elTree);
         }
 
-        for (Long key:res.keySet()) {
+        for (Integer key:res.keySet()) {
             if(key!=0){
                 for (ElTree<Power> e:elTrees) {
                     if(e.getId().equals(key)){
