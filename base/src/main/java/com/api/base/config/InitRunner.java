@@ -70,11 +70,11 @@ public class InitRunner implements CommandLineRunner {
                     parent = new Power();
                     parent.setName(parentName);
                     parent.setUrl(parentUrl);
-                    parent.setPid(0L);
+                    parent.setPid(0);
                     powerService.save(parent);
                 }
             }else {
-               parent=null;
+                parent=null;
             }
 
 

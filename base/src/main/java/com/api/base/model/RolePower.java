@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-@Table(name = "role_power")
+@Table(name = "sys_role_power")
 public class RolePower implements Serializable {
     @Id
     @Column(name = "role_id")
