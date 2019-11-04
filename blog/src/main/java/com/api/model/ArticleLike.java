@@ -15,7 +15,6 @@ public class ArticleLike implements Serializable {
     /**
      * 文章id
      */
-    @Id
     @Column(name = "article_id")
     private Long articleId;
 

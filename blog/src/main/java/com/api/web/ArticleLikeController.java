@@ -47,23 +47,6 @@ public class ArticleLikeController extends Ctrl{
         return ResultGenerator.genSuccessResult();
     }
 
-    @ApiOperation(value = "文章点赞修改", tags = {"文章点赞"}, notes = "文章点赞修改,对象主键必填")
-    @PostMapping(value="/update",name="文章点赞修改")
-    public Result update(@ApiParam ArticleLike articleLike) {
-        articleLikeService.update(articleLike);
-        return ResultGenerator.genSuccessResult();
-    }
-
-    @ApiOperation(value = "文章点赞详细信息", tags = {"文章点赞"}, notes = "文章点赞详细信息")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "id",required=true, value = "文章点赞id", dataType = "Long", paramType = "query")
-    })
-    @PostMapping(value="/detail",name="文章点赞详细信息")
-    public Result detail(@RequestParam Integer id) {
-        ArticleLike articleLike = articleLikeService.findById(id);
-        return ResultGenerator.genSuccessResult(articleLike);
-    }
-
     @ApiOperation(value = "文章点赞列表信息", tags = {"文章点赞"}, notes = "文章点赞列表信息")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "where", value = "条件构建", dataType = "String", paramType = "query"),

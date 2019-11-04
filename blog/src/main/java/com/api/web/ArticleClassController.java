@@ -54,16 +54,6 @@ public class ArticleClassController extends Ctrl{
         return ResultGenerator.genSuccessResult();
     }
 
-    @ApiOperation(value = "文章类型详细信息", tags = {"文章类型"}, notes = "文章类型详细信息")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "id",required=true, value = "文章类型id", dataType = "Long", paramType = "query")
-    })
-    @PostMapping(value="/detail",name="文章类型详细信息")
-    public Result detail(@RequestParam Integer id) {
-        ArticleClass articleClass = articleClassService.findById(id);
-        return ResultGenerator.genSuccessResult(articleClass);
-    }
-
     @ApiOperation(value = "文章类型列表信息", tags = {"文章类型"}, notes = "文章类型列表信息")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "where", value = "条件构建", dataType = "String", paramType = "query"),

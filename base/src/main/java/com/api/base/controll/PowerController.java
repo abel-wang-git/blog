@@ -32,7 +32,7 @@ public class PowerController extends Ctrl {
     @Resource
     private PowerService powerService;
 
-    @ApiOperation(value = "权限树列表", tags = {"账号管理"}, notes = "权限树列表")
+    @ApiOperation(value = "权限树列表", tags = {"权限管理"}, notes = "权限树列表")
     @PostMapping(value = "/list", name = "权限树列表")
     public Result list() {
         List<Power> powers = powerService.findAll();

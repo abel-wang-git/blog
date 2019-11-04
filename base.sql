@@ -3,17 +3,19 @@ create  table  sys_user
     id bigint auto_increment primary key,
     username varchar(255) null,
     password varchar(255) not null,
-    info_mobile_number varchar(15) null comment '手机',
-    info_gender tinyint default '0' not null comment '性别',
-    info_email varchar(50) null comment '邮箱',
-    info_latest_login_time timestamp null comment '最后登录的时间',
+    mobile_number varchar(15) null comment '手机',
+    gender tinyint default '0' not null comment '性别',
+    email varchar(50) null comment '邮箱',
+    latest_login_time timestamp null comment '最后登录的时间',
     create_time datetime comment '创建时间',
+    nickname varchar(100) comment '创建时间',
+    avatar varchar(300) comment '创建时间',
     enable tinyint default 0 not null,
     type tinyint(2) default 2 null,
     openid varchar(200) null,
     constraint user_openId_uindex unique (openid)
 )
-    comment '用户表' charset=utf8;
+    comment '用户表' charset=utf8mb4;
 
 
 create table sys_role

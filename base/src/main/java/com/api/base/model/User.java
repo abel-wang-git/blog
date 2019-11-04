@@ -1,8 +1,8 @@
 package com.api.base.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "sys_user")
 public class User implements Serializable {
@@ -17,32 +17,40 @@ public class User implements Serializable {
     /**
      * 手机
      */
-    @Column(name = "info_mobile_number")
-    private String infoMobileNumber;
+    @Column(name = "mobile_number")
+    private String mobileNumber;
 
     /**
      * 性别
      */
-    @Column(name = "info_gender")
-    private Byte infoGender;
+    private Byte gender;
 
     /**
      * 邮箱
      */
-    @Column(name = "info_email")
-    private String infoEmail;
+    private String email;
 
     /**
      * 最后登录的时间
      */
-    @Column(name = "info_latest_login_time")
-    private Date infoLatestLoginTime;
+    @Column(name = "latest_login_time")
+    private Date latestLoginTime;
 
     /**
      * 创建时间
      */
     @Column(name = "create_time")
     private Date createTime;
+
+    /**
+     * 创建时间
+     */
+    private String nickname;
+
+    /**
+     * 创建时间
+     */
+    private String avatar;
 
     private Byte enable;
 
@@ -97,73 +105,73 @@ public class User implements Serializable {
     /**
      * 获取手机
      *
-     * @return info_mobile_number - 手机
+     * @return mobile_number - 手机
      */
-    public String getInfoMobileNumber() {
-        return infoMobileNumber;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
     /**
      * 设置手机
      *
-     * @param infoMobileNumber 手机
+     * @param mobileNumber 手机
      */
-    public void setInfoMobileNumber(String infoMobileNumber) {
-        this.infoMobileNumber = infoMobileNumber;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     /**
      * 获取性别
      *
-     * @return info_gender - 性别
+     * @return gender - 性别
      */
-    public Byte getInfoGender() {
-        return infoGender;
+    public Byte getGender() {
+        return gender;
     }
 
     /**
      * 设置性别
      *
-     * @param infoGender 性别
+     * @param gender 性别
      */
-    public void setInfoGender(Byte infoGender) {
-        this.infoGender = infoGender;
+    public void setGender(Byte gender) {
+        this.gender = gender;
     }
 
     /**
      * 获取邮箱
      *
-     * @return info_email - 邮箱
+     * @return email - 邮箱
      */
-    public String getInfoEmail() {
-        return infoEmail;
+    public String getEmail() {
+        return email;
     }
 
     /**
      * 设置邮箱
      *
-     * @param infoEmail 邮箱
+     * @param email 邮箱
      */
-    public void setInfoEmail(String infoEmail) {
-        this.infoEmail = infoEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
      * 获取最后登录的时间
      *
-     * @return info_latest_login_time - 最后登录的时间
+     * @return latest_login_time - 最后登录的时间
      */
-    public Date getInfoLatestLoginTime() {
-        return infoLatestLoginTime;
+    public Date getLatestLoginTime() {
+        return latestLoginTime;
     }
 
     /**
      * 设置最后登录的时间
      *
-     * @param infoLatestLoginTime 最后登录的时间
+     * @param latestLoginTime 最后登录的时间
      */
-    public void setInfoLatestLoginTime(Date infoLatestLoginTime) {
-        this.infoLatestLoginTime = infoLatestLoginTime;
+    public void setLatestLoginTime(Date latestLoginTime) {
+        this.latestLoginTime = latestLoginTime;
     }
 
     /**
@@ -182,6 +190,42 @@ public class User implements Serializable {
      */
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    /**
+     * 获取创建时间
+     *
+     * @return nickname - 创建时间
+     */
+    public String getNickname() {
+        return nickname;
+    }
+
+    /**
+     * 设置创建时间
+     *
+     * @param nickname 创建时间
+     */
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    /**
+     * 获取创建时间
+     *
+     * @return avatar - 创建时间
+     */
+    public String getAvatar() {
+        return avatar;
+    }
+
+    /**
+     * 设置创建时间
+     *
+     * @param avatar 创建时间
+     */
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     /**

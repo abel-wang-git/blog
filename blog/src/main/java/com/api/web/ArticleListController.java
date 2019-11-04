@@ -2,6 +2,7 @@ package com.api.web;
 import com.api.core.Ctrl;
 import com.api.core.response.Result;
 import com.api.core.response.ResultGenerator;
+import com.api.model.ArticleContent;
 import com.api.model.ArticleList;
 import com.api.service.ArticleListService;
 import com.github.pagehelper.PageHelper;
@@ -32,7 +33,7 @@ public class ArticleListController extends Ctrl{
 
     @ApiOperation(value = "文章列表信息添加", tags = {"文章列表信息"}, notes = "文章列表信息添加")
     @PostMapping(value="/add",name="文章列表信息添加")
-    public Result add(@ApiParam ArticleList articleList) {
+    public Result add(@ApiParam ArticleList articleList,@ApiParam ArticleContent articleContent) {
         articleListService.save(articleList);
         return ResultGenerator.genSuccessResult();
     }

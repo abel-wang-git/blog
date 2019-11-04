@@ -54,15 +54,6 @@ public class ArticleCommentController extends Ctrl{
         return ResultGenerator.genSuccessResult();
     }
 
-    @ApiOperation(value = "文章评论详细信息", tags = {"文章评论"}, notes = "文章评论详细信息")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "id",required=true, value = "文章评论id", dataType = "Long", paramType = "query")
-    })
-    @PostMapping(value="/detail",name="文章评论详细信息")
-    public Result detail(@RequestParam Integer id) {
-        ArticleComment articleComment = articleCommentService.findById(id);
-        return ResultGenerator.genSuccessResult(articleComment);
-    }
 
     @ApiOperation(value = "文章评论列表信息", tags = {"文章评论"}, notes = "文章评论列表信息")
     @ApiImplicitParams({
