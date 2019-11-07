@@ -11,11 +11,11 @@
   </resultMap>
 
   <select id="getByUser" parameterType="java.lang.Long" resultType="com.api.base.model.Role">
-     SELECT r.* FROM (SELECT  * FROM user_role WHERE user_id = #{userId}) u
-        LEFT JOIN role r ON (r.id = u.role_id)
+     SELECT r.* FROM (SELECT  * FROM sys_user_role WHERE user_id = #{userId}) u
+        LEFT JOIN sys_role r ON (r.id = u.role_id)
    </select>
 
     <select id="deletePower" parameterType="java.lang.Long" >
-      DELETE FROM role_power WHERE role_id = #{roleId}
+      DELETE FROM sys_role_power WHERE role_id = #{roleId}
     </select>
 </mapper>

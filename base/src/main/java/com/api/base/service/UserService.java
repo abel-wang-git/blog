@@ -4,6 +4,7 @@ import com.api.base.model.Role;
 import com.api.base.model.User;
 import com.api.base.model.UserRole;
 import com.api.core.Service;
+import com.api.core.response.Result;
 
 import java.util.List;
 
@@ -16,6 +17,6 @@ public interface UserService extends Service<User> {
     List<Role> getRole(Long userId);
 
 
-    void addRole(List<UserRole> roles, Long userId);
+    Result addRole(List<Long> roles, Long userId);
 
 }

@@ -39,7 +39,7 @@ public class PowerController extends Ctrl {
 
         Map<Integer, List<Power>> res = powers.stream().collect(Collectors.groupingBy(Power::getPid));
 
-        List<Power> parent = res.get(0L);
+        List<Power> parent = res.get(0);
 
 
         List<ElTree<Power>> elTrees = new ArrayList<>();

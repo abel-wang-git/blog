@@ -3,6 +3,7 @@ package com.api.base.controll;
 import com.alibaba.fastjson.JSON;
 import com.api.base.config.auth.AuthUser;
 import com.api.base.config.auth.JwtTokenUtil;
+import com.api.base.model.Role;
 import com.api.base.model.User;
 import com.api.base.model.UserRole;
 import com.api.base.service.UserService;
@@ -83,8 +84,16 @@ public class UserController extends Ctrl {
     @PostMapping(value = "/add/role", name = "用户添加角色")
     @Caching(evict = {@CacheEvict(value = "role", key = "#userId"), @CacheEvict(value = "power", key = "#userId")})
     public Result addRole(String roles, Long userId) {
-        userService.addRole(JSON.parseArray(roles, UserRole.class), userId);
-        return ResultGenerator.genSuccessResult();
+        List<Long> roleids = JSON.parseArray(roles, Long.class);
+
+
+        return userService.addRole(roleids, userId);
+    }
+
+    @PostMapping(value = "/get/role", name = "获取用户角色")
+    public Result getRole(@RequestParam Long userId) {
+        List<Role> roles = userService.getRole(userId);
+        return ResultGenerator.genSuccessResult(roles);
     }
 
     @ApiOperation(value = "获取登录用户信息", tags = {"账号管理"}, notes = "获取登录用户信息")

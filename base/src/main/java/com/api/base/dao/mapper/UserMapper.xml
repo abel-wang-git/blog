@@ -20,6 +20,6 @@
     <result column="openid" jdbcType="VARCHAR" property="openid" />
   </resultMap>
   <select id="deleteRoleById" parameterType="java.lang.Long">
-    DELETE FROM user_role WHERE user_id = #{userId}
+    DELETE FROM sys_user_role WHERE user_id = #{userId}
   </select>
 </mapper>
