@@ -39,6 +39,7 @@ public class RoleServiceImpl extends AbstractService<Role> implements RoleServic
             rolePower.setRoleId(roleId);
             rolePowers.add(rolePower);
         }
-        rolePowerMapper.insertListNoAuto(rolePowers);
+        if(rolePowers.size()>0)
+            rolePowerMapper.insertListNoAuto(rolePowers);
     }
 }
