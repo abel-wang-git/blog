@@ -32,7 +32,7 @@ public class ArticleListController extends Ctrl{
     private ArticleListService articleListService;
 
     @ApiOperation(value = "文章列表信息添加", tags = {"文章列表信息"}, notes = "文章列表信息添加")
-    @PostMapping(value="/add",name="文章列表信息添加")
+    @PostMapping(value="/add",name="文章信息添加")
     public Result add(@ApiParam ArticleList articleList,@ApiParam ArticleContent articleContent) {
         articleListService.save(articleList);
         return ResultGenerator.genSuccessResult();
