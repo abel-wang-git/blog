@@ -2,7 +2,9 @@ package com.api.base.config.auth;
 
 import com.api.base.config.auth.handler.*;
 import com.api.base.config.auth.service.DetailsServic;
+import com.api.base.model.SysWhitelist;
 import com.api.base.service.PowerService;
+import com.api.base.service.SysWhitelistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,7 @@ import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -24,6 +27,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Configuration
 @EnableWebSecurity
@@ -31,6 +38,9 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PowerService powerService;
+    @Resource
+    private SysWhitelistService sysWhitelistService;
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -79,11 +89,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().disable();
+        List<SysWhitelist> whitelists=sysWhitelistService.selectAll();
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/login", "/static/**", "/favicon.ico", "/view/**", "/image/** ", "/swagger-ui.html", "/webjars/**", "/swagger-resources/**", "/v2/api-docs", "/wx/message","/wx/secMessage","/out/log/export","equipment/export").permitAll()
+                .antMatchers(HttpMethod.OPTIONS,
+                        whitelists.stream().map(SysWhitelist::getUrl).toArray(String[]::new)
+                        ).permitAll()
                 .withObjectPostProcessor(new MyObjectPostProcessor())
                 .anyRequest().authenticated()
                 .and().exceptionHandling()
@@ -105,14 +118,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private class MyObjectPostProcessor implements ObjectPostProcessor<FilterSecurityInterceptor> {
         @Override
         public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
-            fsi.setSecurityMetadataSource(new PowerSource(powerService));
+            fsi.setSecurityMetadataSource(new PowerSource(powerService,sysWhitelistService));
             fsi.setAccessDecisionManager(new AccessManager());
             return fsi;
         }
 
     }
 
-//    public static void main(String[] args) {
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+
+        super.configure(web);
+    }
+
+    //    public static void main(String[] args) {
 //        System.out.println(new BCryptPasswordEncoder().encode("123456"));
 //    }
 }

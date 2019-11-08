@@ -1,7 +1,9 @@
 package com.api.base.config.auth;
 
 import com.api.base.model.Power;
+import com.api.base.model.SysWhitelist;
 import com.api.base.service.PowerService;
+import com.api.base.service.SysWhitelistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,19 +13,23 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Component
 public class PowerSource implements FilterInvocationSecurityMetadataSource {
     Logger logger =  LoggerFactory.getLogger(this.getClass());
 
     private PowerService powerService;
 
-    public PowerSource(PowerService powerService) {
+    private SysWhitelistService sysWhitelistService;
+
+    public PowerSource(PowerService powerService,SysWhitelistService sysWhitelistService) {
         this.powerService = powerService;
+        this.sysWhitelistService=sysWhitelistService;
     }
 
     /**
@@ -71,10 +77,11 @@ public class PowerSource implements FilterInvocationSecurityMetadataSource {
      * @return 定义允许请求的列表
      */
     private List<String> allowedRequest(){
-        return Arrays.asList("/swagger-ui.html","/login","/page/**","/css/**","/fonts/**","/js/**","/scss/**",
-                "/img/**","/static/**","/favicon.ico","/gettoken","/image/**","/webjars/springfox-swagger-ui/**",
-                "/swagger-resources/**","/v2/api-docs/**","/user/get/openid","/patient/source/async","/payment/notify",
-                "/user/refresh/token","/user/registered");
+        List<SysWhitelist> whitelists=sysWhitelistService.findAll();
+
+        return whitelists.stream()
+                .map(SysWhitelist::getUrl)
+                .collect(Collectors.toList());
     }
 
     @Override
