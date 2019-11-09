@@ -80,7 +80,7 @@ public class Upload {
         String up = "img/";
         try {
             String spath = ImageUploadUtil.upload(request, path + up);
-            return ResultGenerator.genSuccessResult("http://" + host + ":" + port + "/" + context + "/image/" + up + spath.split(",")[0]).setMessage("上传成功");
+            return ResultGenerator.genSuccessResult("image/" + up + spath.split(",")[0]).setMessage("上传成功");
         } catch (IOException e) {
             logger.error("图片上传出错",e);
             return ResultGenerator.genFailResult("图片上传出错");

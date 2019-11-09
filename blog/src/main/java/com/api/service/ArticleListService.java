@@ -1,4 +1,6 @@
 package com.api.service;
+import com.api.core.response.Result;
+import com.api.model.ArticleContent;
 import com.api.model.ArticleList;
 import com.api.core.Service;
 
@@ -8,4 +10,5 @@ import com.api.core.Service;
  */
 public interface ArticleListService extends Service<ArticleList> {
 
+    Result add(ArticleList list, ArticleContent content);
 }

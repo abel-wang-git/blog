@@ -10,6 +10,7 @@ public class ArticleClass implements Serializable {
      */
     @Id
     @Column(name = "class_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long classId;
 
     /**

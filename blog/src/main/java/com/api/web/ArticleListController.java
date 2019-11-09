@@ -1,4 +1,5 @@
 package com.api.web;
+import com.api.base.config.auth.AuthUser;
 import com.api.core.Ctrl;
 import com.api.core.response.Result;
 import com.api.core.response.ResultGenerator;
@@ -7,6 +8,7 @@ import com.api.model.ArticleList;
 import com.api.service.ArticleListService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,9 +35,23 @@ public class ArticleListController extends Ctrl{
 
     @ApiOperation(value = "文章列表信息添加", tags = {"文章列表信息"}, notes = "文章列表信息添加")
     @PostMapping(value="/add",name="文章信息添加")
-    public Result add(@ApiParam ArticleList articleList,@ApiParam ArticleContent articleContent) {
-        articleListService.save(articleList);
-        return ResultGenerator.genSuccessResult();
+    public Result add(Authentication authentication,
+                      @RequestParam String title,
+                      @RequestParam String content,
+                      @RequestParam String coverPicture,
+                      @RequestParam Long classId) {
+        AuthUser authUser = (AuthUser) authentication.getPrincipal();
+
+        ArticleList list = new ArticleList();
+        list.setClassId(classId);
+        list.setCoverPicture(coverPicture);
+        list.setTitle(title);
+        list.setUid(authUser.getId());
+
+        ArticleContent articleContent = new ArticleContent();
+        articleContent.setContent(content);
+
+        return  articleListService.add(list,articleContent);
     }
 
     @ApiOperation(value = "文章列表信息删除", tags = {"文章列表信息"}, notes = "文章列表信息删除")

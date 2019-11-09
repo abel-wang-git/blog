@@ -11,6 +11,7 @@ public class ArticleList implements Serializable {
      */
     @Id
     @Column(name = "article_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long articleId;
 
     /**
